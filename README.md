@@ -1,4 +1,4 @@
-35:00
+58:44
 
 
 >> npm start
@@ -10,6 +10,8 @@
 >> npm install react-native-safe-area-context // css  class
 
 >> npx expo lint
+
+>> npm install react-native-swiper
 
 
 Nativewind: tailwind for native react
