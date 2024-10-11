@@ -1,1 +1,3 @@
-init
+
+
+>>npx create-expo-app@latest ./
