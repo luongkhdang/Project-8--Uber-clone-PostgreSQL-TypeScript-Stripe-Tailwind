@@ -1,5 +1,5 @@
-58:44
 1:24:35
+1:41:22
 
 
 >> npm start
@@ -15,5 +15,15 @@
 >> npm install react-native-swiper
 
 
+>> npx expo install react-dom react-native-web @expo/metro-runtime
+>> npm install @clerk/clerk-expo
+>> npm install expo-secure-store
+
+>> npm install react-native-modal
+>> npm install expo-local-authentication
+
+
+Expo: framework
 Nativewind: tailwind for native react
+Clerk: sign-in box
 
