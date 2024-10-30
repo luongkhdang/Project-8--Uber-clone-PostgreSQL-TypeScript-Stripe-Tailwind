@@ -1,6 +1,4 @@
-1:24:35
-1:41:22
-
+2:26:01
 
 >> npm start
 
@@ -21,9 +19,11 @@
 
 >> npm install react-native-modal
 >> npm install expo-local-authentication
+>> npm install @neondatabase/serverless
 
 
 Expo: framework
 Nativewind: tailwind for native react
 Clerk: sign-in box
-
+Postgres+NEON: Database
+FlatList

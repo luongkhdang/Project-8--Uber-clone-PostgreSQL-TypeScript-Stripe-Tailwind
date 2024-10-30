@@ -1,12 +1,15 @@
 import { ScrollView, Text, View, Image, Alert } from "react-native";
 import { icons, images } from "@/constants";
 import InputField from "@/components/InputField";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import OAuth from "@/components/OAuth";
 import { useSignUp } from "@clerk/clerk-expo";
 import { ReactNativeModal } from "react-native-modal";
+import { fetchAPI } from "@/lib/fetch";
+
+type VerificationState = "default" | "pending" | "success" | "failed";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -20,7 +23,7 @@ const SignUp = () => {
   });
 
   const [verification, setVerification] = useState({
-    state: "default",
+    state: "default" as VerificationState,
     error: "",
     code: "",
   });
@@ -58,6 +61,16 @@ const SignUp = () => {
 
       if (completeSignUp.status === "complete") {
         //TODO: Create a database user!
+
+        await fetchAPI("/(api)/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: completeSignUp.createdUserId,
+          }),
+        });
+
         await setActive({ session: completeSignUp.createdSessionId });
         setVerification({ ...verification, state: "success" });
       } else {
