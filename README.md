@@ -1,4 +1,6 @@
-2:26:01
+2:29:00
+2:58:10
+
 
 >> npm start
 
@@ -27,3 +29,4 @@ Nativewind: tailwind for native react
 Clerk: sign-in box
 Postgres+NEON: Database
 FlatList
+geoapify: Map 
