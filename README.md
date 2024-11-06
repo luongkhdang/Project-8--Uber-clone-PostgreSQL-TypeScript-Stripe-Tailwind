@@ -1,5 +1,5 @@
-2:58:10
-3:15
+3:12:41
+3:31:30
 
 >> npm start
 
@@ -26,6 +26,7 @@
 >> npm install zustand
 
 >> npm install expo-location
+>> npm install react-native-google-places-autocomplete
 
 Expo: framework
 Nativewind: tailwind for native react
