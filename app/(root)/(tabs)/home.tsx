@@ -9,11 +9,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
 import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
+import { useLocationStore } from "@/store";
+import * as Location from "expo-location";
 
 const recentRides = [
   {
@@ -122,12 +124,38 @@ const recentRides = [
   },
 ];
 export default function Page() {
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
   const loading = true;
+
+  const [hasPermission, setPermission] = useState(false);
 
   const handleSignOut = () => {};
   const handleDestinationPress = useCallback(() => {});
 
+  useEffect(() => {
+    const requestLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") {
+        setPermission(false);
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync();
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      setUserLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        address: `${address[0].name}, ${address[0].region}}`,
+      });
+    };
+    requestLocation();
+  }, []);
   return (
     <SafeAreaView>
       <FlatList
@@ -187,6 +215,9 @@ export default function Page() {
                 <Map />
               </View>
             </>
+            <Text className="text-xl font-JakartaBold mt-5 mb-3">
+              Recent Rides
+            </Text>
           </>
         )}
       />
